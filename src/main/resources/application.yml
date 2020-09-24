@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: springboot-shiro-demo
+#    数据源和连接池
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: scott
+    password: xjh12345678
+#    druid连接池配置
+    druid:
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+      max-wait: 30000
+# 启动加载sql语句，配合下方spring,jpa.hibernate.ddl-auto=create-drop 每次启动重新创建
+    initialization-mode: always
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+#jpa相关配置
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.Oracle10gDialect
+        format_sql: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: html
+    encoding: utf-8
+  #    静态资源访问配置
+  resources:
+    chain:
+      strategy:
+        content:
+          paths: /**
+          enabled: true
+    static-locations: classpath:/resources
+
+# 2.0以后自动继承logback ,在resource目录下新建logback-spring.xml（springboot2会自动识别）
+logging:
+  config: classpath:log/logback.xml
+#  该路径在项目的log/spring-boot-log目录下
+  path: log/spring-boot-log
+server:
+  port: 8090
+  servlet:
+#    自定义上下文路径
+    context-path: /myApplication
+#mybatis 实体包 和 mapper文件位置配置
+mybatis:
+  type-aliases-package: com.master.bean.*
+  mapper-locations: classpath:mapper/*.xml
+

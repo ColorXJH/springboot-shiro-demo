@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.master.dao.UserDao">
+    <!--scott用户下-->
+    <!--tb_users -->
+    <!--tb_users_roles-->
+    <!--tb_roles-->
+    <!--tb_roles_permissions-->
+    <!--tb_permissions-->
+    <!--启动项目自动创建这些表和数据-->
+    <select id="getPasswd" resultType="java.lang.String">
+                select password from tb_users where username=#{username}
+    </select>
+
+    <select id="getRoles" resultType="java.lang.String">
+          select r.role from tb_roles r,tb_users_roles ur,tb_users u where r.id=ur.role_id and u.id=ur.user_id and u.username=#{username}
+    </select>
+
+    <select id="getPermissions" resultType="java.lang.String">
+        select p.permission
+        from tb_permissions p,
+            tb_roles_permissions rp,
+            tb_roles r,
+            tb_users u,
+            tb_users_roles ur
+        where  r.id=ur.role_id
+        and u.id=ur.user_id
+        and r.id=rp.role_id
+        and p.id=rp.permission_id
+        and u.username=#{username}
+    </select>
+</mapper>
