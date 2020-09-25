@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2020/9/24 12:04
  */
 @SpringBootApplication
-//扫描所有的mybatis包接口，也可以在每一个接口上注解@MapperScan,这样可以不用统一扫描，不过同意扫描方便些
+//扫描所有的mybatis包接口，也可以在每一个接口上注解@Mapper,这样可以不用统一扫描，不过同意扫描方便些
 @MapperScan(value = "com.master.dao")
 public class Application {
 
