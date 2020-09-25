@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2020/9/24 12:31
  */
 @Repository
-//@MapperScan 也可以
+//@Mapper 也可以
 public interface UserDao {
     /**
      * @description: 获得密码
